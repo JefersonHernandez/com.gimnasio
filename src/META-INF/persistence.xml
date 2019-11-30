@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="gimnasio">
+		<class>com.gimnasio.entities.Aparato</class>
+		<class>com.gimnasio.entities.AparatoEstado</class>
+		<class>com.gimnasio.entities.Asiste</class>
+		<class>com.gimnasio.entities.AsistePK</class>
+		<class>com.gimnasio.entities.Monitor</class>
+		<class>com.gimnasio.entities.PistaEstado</class>
+		<class>com.gimnasio.entities.PistaSquash</class>
+		<class>com.gimnasio.entities.Preparacion</class>
+		<class>com.gimnasio.entities.Reserva</class>
+		<class>com.gimnasio.entities.ReservaPK</class>
+		<class>com.gimnasio.entities.Sala</class>
+		<class>com.gimnasio.entities.Socio</class>
+		<class>com.gimnasio.entities.TipoSala</class>
+		<class>com.gimnasio.entities.Clase</class>
+
+		
+		<properties>
+		<!-- Configuring JDBC properties -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/gimnasio?serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+
+ <!-- 
+ 
+ <property name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+ 
+  -->
+	
+	<!-- Hibernate properties -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+	</properties>	
+	</persistence-unit>
+</persistence>

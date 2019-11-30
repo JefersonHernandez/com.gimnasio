@@ -1,0 +1,25 @@
+body{
+	background-color:whitesmoke;
+}
+.father {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.dashboard {/*background-color: #F0FFFF	;*/
+	
+	padding: 10px;
+}
+
+aside {
+	/*background-color: #7FFFD4;*/
+	
+	padding: 10px;
+}
+
+.lateral{/*background-color: gray;*/
+	
+}
+.my-note{
+	background-color: green;
+}
