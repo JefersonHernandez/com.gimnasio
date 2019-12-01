@@ -10,60 +10,57 @@
 <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-	
+
 	<%@include file="html/header.html"%>
 	<%@include file="html/nav.html"%>
-
-	<div>
-		<div class="row father">
-			<div class="col-md-8 dashboard">
-
+	<div class="container">
+		<div class="row padding">
+			<div class="card col-md-8 margin">
 				<c:choose>
 					<c:when test="${rol_user == 1}">
 						<table class="table mb-5 table-hover">
-							<thead class='bg-light'>
-								<tr class="table-info">
+							<thead>
+								<tr>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Codigo</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Codigo</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Dia</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Dia</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Hora</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Hora</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Descripcion</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Descripcion</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Monitor</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Monitor</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Sala</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Sala</th>
 									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Cancelar</th>
-									<th scope='col'
-										class='border-0 text-primary text-center text-uppercase'>Update</th>
+										class='border-0 text-primary text-center text-uppercase text-warning'>Cancelar</th>
+
 
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="n" items="${socio.asiste}">
+								<c:forEach var="n" items="${socio.clases}">
 									<tr>
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.codigo}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.codigo}" /></td>
 
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.dia}" /></td>
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.hora}" /></td>
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.descripcion.descripcion}" /></td>
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.monitor.nombre}" /></td>
-										<td class="text-center font-weight-light"><c:out
-												value="${n.clase.sala.numero}" /></td>
-										<td class="text-center font-weight-light"><a
-											class="btn btn-danger"
-											href="DeleteClaseSocio?codigo_clase=${n.clase.codigo}&codigo_user=${socio.numero}">Cancelar</a></td>
-										<td class="text-center font-weight-light"><a
-											class="btn btn-info" href="#=${n.clase.codigo}">Editar</a></td>
 
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.dia}" /></td>
+
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.hora}" /></td>
+
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.preparacion.descripcion}" /></td>
+
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.monitorBean.nombre}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.salaBean.numero}" /></td>
+										<td class="text-center font-weight-light"><a class="text-danger"
+											href="DeleteClaseSocio?codigo_clase=${n.codigo }">Cancelar</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -109,22 +106,23 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-
-			<div class="col-md-4 lateral">
+			<div class="card col">
 				<c:choose>
 					<c:when test="${socio!=null}">
 						<%@include file="html/aside.html"%>
 					</c:when>
 					<c:otherwise>
-						<%@include file="html/login.html"%>
+						fgfgfgfgfgf
 					</c:otherwise>
 				</c:choose>
 			</div>
 
 		</div>
+		<%@include file="html/footer.html"%>
 	</div>
 
-	<%@include file="html/footer.html"%>
+
+
 
 </body>
 </html>

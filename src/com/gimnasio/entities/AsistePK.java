@@ -12,53 +12,50 @@ public class AsistePK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="numero_socio", insertable=false, updatable=false)
-	private int numeroSocio;
+	@Column(name="fk_clase", insertable=false, updatable=false)
+	private int fkClase;
 
-	@Column(name="codigo_clase", insertable=false, updatable=false)
-	private int codigoClase;
+	@Column(name="fk_socio", insertable=false, updatable=false)
+	private int fkSocio;
 
 	public AsistePK() {
 	}
-	
-	 public int getNumeroSocio() {
-		return this.numeroSocio;
+	public int getFkClase() {
+		return this.fkClase;
 	}
-	public void setNumeroSocio(int numeroSocio) {
-		this.numeroSocio = numeroSocio;
+	public void setFkClase(int fkClase) {
+		this.fkClase = fkClase;
 	}
-	public int getCodigoClase() {
-		return this.codigoClase;
+	public int getFkSocio() {
+		return this.fkSocio;
 	}
-	public void setCodigoClase(int codigoClase) {
-		this.codigoClase = codigoClase;
+	public void setFkSocio(int fkSocio) {
+		this.fkSocio = fkSocio;
 	}
 
-	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof AsistePK)) {
+			return false;
+		}
+		AsistePK castOther = (AsistePK)other;
+		return 
+			(this.fkClase == castOther.fkClase)
+			&& (this.fkSocio == castOther.fkSocio);
+	}
+
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + codigoClase;
-		result = prime * result + numeroSocio;
-		return result;
+		int hash = 17;
+		hash = hash * prime + this.fkClase;
+		hash = hash * prime + this.fkSocio;
+		
+		return hash;
 	}
-
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AsistePK other = (AsistePK) obj;
-		if (codigoClase != other.codigoClase)
-			return false;
-		if (numeroSocio != other.numeroSocio)
-			return false;
-		return true;
+	public String toString() {
+		return "AsistePK [fkClase=" + fkClase + ", fkSocio=" + fkSocio + "]";
 	}
-
-
-
 }

@@ -15,23 +15,26 @@
 	<div class="row">
     <div class="col-md-4">
     </div>
-    <div class="col-md-4">
+    <div class=" card col-md-4">
         <!-- Default form login -->
-        <form class="text-center border border-light p-5" method="post" action="LoginController">
-            <p class="h4 mb-4" >Iniciar Sesion</p>
+        <form class="text-center p-5" method="post" action="LoginController">
+            <h2 class="h4 mb-4" >Iniciar Sesion</h2>
             <!-- Email -->
             <input type="text" name="documento" class="form-control mb-4" placeholder="Documento"  required/>
             <!-- Password -->
             <input type="password" name="clave" class="form-control mb-4" placeholder="Clave" required/>
             <div class="form-group mb-2">
                 <div class="btn-group  mb-3">
-                  <label class="btn btn-white">
+                  <label class="btn btn-white text-white">
                     <input type="radio" name="tipo_usuario" checked autocomplete="off" value="SOCIO">
                     SOCIO
                   </label>
-                  <label class="btn btn-white">
+                  <label class="btn btn-white text-white">
                     <input type="radio" name="tipo_usuario" autocomplete="off" value="MONITOR">
                     MONITOR </label>
+                    <label class="btn btn-white text-white">
+                    <input type="radio" name="tipo_usuario" autocomplete="off" value="ADMINISTRADOR">
+                    ADMIN </label>
                 </div></div>
                 <c:if test="${fail_login!=null}">
                 

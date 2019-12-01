@@ -1,9 +1,8 @@
 package com.gimnasio.entities;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,20 +16,20 @@ public class Preparacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 
-	@Column(name="descripcion", length=200)
-	private String descripcion;	
-	
-	@OneToMany(mappedBy = "descripcion")
+	private String descripcion;
+
+	//bi-directional many-to-one association to Clase
+	@OneToMany(mappedBy="preparacion")
 	private List<Clase> clases;
-	
+
 	public Preparacion() {
 	}
 
 	public int getCodigo() {
-		return codigo;
+		return this.codigo;
 	}
 
 	public void setCodigo(int codigo) {
@@ -38,7 +37,7 @@ public class Preparacion implements Serializable {
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
@@ -46,12 +45,25 @@ public class Preparacion implements Serializable {
 	}
 
 	public List<Clase> getClases() {
-		return clases;
+		return this.clases;
 	}
 
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
 	}
 
-	
+	public Clase addClas(Clase clas) {
+		getClases().add(clas);
+		clas.setPreparacion(this);
+
+		return clas;
+	}
+
+	public Clase removeClas(Clase clas) {
+		getClases().remove(clas);
+		clas.setPreparacion(null);
+
+		return clas;
+	}
+
 }

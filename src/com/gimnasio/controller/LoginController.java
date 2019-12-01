@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.gimnasio.entities.Administradores;
 import com.gimnasio.entities.Monitor;
 import com.gimnasio.entities.Socio;
+import com.gimnasio.model.AdministradoresDAO;
 import com.gimnasio.model.MonitorDAO;
 import com.gimnasio.model.SocioDAO;
 import com.gimnasio.util.ExceptionInvalidUser;
@@ -64,24 +66,53 @@ public class LoginController extends HttpServlet {
 															// database pass)
 						throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
 					}
-				
+
 					misession.setAttribute("socio", socio);
 					misession.setAttribute("rol_user", 1);
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
 				} catch (ExceptionInvalidUser e) {
-					
+
 					misession.setAttribute("fail_login", e.getMessage());
 					response.sendRedirect(request.getContextPath() + "/Login.jsp");
 				}
 
 			} else {
-				System.out.println("no existe");
+				
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			}
 
 		} else if (tipoUsuario.equals("MONITOR")) {
+			MonitorDAO monitorDao = new MonitorDAO();
+			Monitor monitor = monitorDao.find(usuario);
+			try {
+				if (!monitor.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
+					// database pass)
+					throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
+				}
 
+				misession.setAttribute("monitor", monitor);
+				misession.setAttribute("rol_user", 2);
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} catch (Exception e) {
+				misession.setAttribute("fail_login", e.getMessage());
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			}
 		} else if (tipoUsuario.equals("ADMINISTRADOR")) {
+			AdministradoresDAO adminDao = new AdministradoresDAO();
+			Administradores admin = adminDao.find(usuario);
+			try {
+				if (!admin.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
+					// database pass)
+					throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
+				}
+
+				misession.setAttribute("admin", admin);
+				misession.setAttribute("rol_user", 3);
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} catch (Exception e) {
+				misession.setAttribute("fail_login", e.getMessage());
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			}
 
 		}
 		// response.sendRedirect(request.getContextPath() + "/index.jsp");

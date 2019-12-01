@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gimnasio.entities.Asiste;
 import com.gimnasio.entities.AsistePK;
@@ -34,34 +35,20 @@ public class DeleteClaseSocio extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		//ClaseDAO clase = new ClaseDAO();
-		//clase.delete(clase.find(Integer.parseInt(request.getParameter("codigo"))));
-		
+
+		HttpSession misession;
+		misession = request.getSession(true);
+		Socio ss = (Socio) misession.getAttribute("socio");
+		ClaseDAO claseDao = new ClaseDAO();
+		SocioDAO socioDao = new SocioDAO();
 		AsisteDAO asisteDao = new AsisteDAO();
 		Asiste asiste = new Asiste();
 		AsistePK asistePk = new AsistePK();
-		SocioDAO socioDao = new SocioDAO();
-		ClaseDAO claseDao = new ClaseDAO();
-		
-		Clase clase = new Clase();
-		Socio ss = new Socio();
-		
-		clase.setCodigo(Integer.parseInt(request.getParameter("codigo_clase")));
-		ss.setNumero(Integer.parseInt(request.getParameter("codigo_user")));
-		
-		clase = claseDao.find(clase.getCodigo());
-		ss = socioDao.find(ss.getNumero());
-	
-		System.out.print(ss.getClave());
-		asiste.setSocio(ss);
-		asiste.setClase(clase);
-		//asistePk.setCodigoClase(asiste.getSocio().getNumero());
-		//asistePk.setNumeroSocio(asiste.getClase().getCodigo());
-		//asiste.setId(asistePk);
-		asisteDao.delete(asiste);
-		
+		asistePk.setFkClase(claseDao.find(Integer.parseInt(request.getParameter("codigo_clase"))).getCodigo());
+		asistePk.setFkSocio(socioDao.find(ss.getNumero()).getNumero());
+		asiste.setId(asistePk);
+		asisteDao.delete(asisteDao.find(asistePk));
+
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 

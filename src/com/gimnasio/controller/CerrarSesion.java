@@ -14,29 +14,39 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/CerrarSesion")
 public class CerrarSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CerrarSesion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession misession= request.getSession(true);
-		misession.removeAttribute("socio");
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	public CerrarSesion() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession misession = request.getSession(true);
+		if (misession.getAttribute("socio") != null) {
+			misession.removeAttribute("socio");
+		} else if (misession.getAttribute("admin") != null) {
+			misession.removeAttribute("admin");
+		} else if (misession.getAttribute("monitor") != null) {
+			misession.removeAttribute("monitor");
+		}
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

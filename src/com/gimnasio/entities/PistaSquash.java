@@ -16,10 +16,9 @@ public class PistaSquash implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int numero;
 
-	@Column(name="descripcion")
 	private String descripcion;
 
 	//bi-directional many-to-one association to PistaEstado
@@ -28,8 +27,8 @@ public class PistaSquash implements Serializable {
 	private PistaEstado pistaEstadoBean;
 
 	//bi-directional many-to-one association to Reserva
-	@OneToMany(mappedBy="pistaSquash",cascade=CascadeType.MERGE)
-	private List<Reserva> reservas1;
+	@OneToMany(mappedBy="pistaSquash")
+	private List<Reserva> reservas;
 
 	public PistaSquash() {
 	}
@@ -58,26 +57,26 @@ public class PistaSquash implements Serializable {
 		this.pistaEstadoBean = pistaEstadoBean;
 	}
 
-	public List<Reserva> getReservas1() {
-		return this.reservas1;
+	public List<Reserva> getReservas() {
+		return this.reservas;
 	}
 
-	public void setReservas1(List<Reserva> reservas1) {
-		this.reservas1 = reservas1;
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 
-	public Reserva addReservas1(Reserva reservas1) {
-		getReservas1().add(reservas1);
-		reservas1.setPistaSquash1(this);
+	public Reserva addReserva(Reserva reserva) {
+		getReservas().add(reserva);
+		reserva.setPistaSquash(this);
 
-		return reservas1;
+		return reserva;
 	}
 
-	public Reserva removeReservas1(Reserva reservas1) {
-		getReservas1().remove(reservas1);
-		reservas1.setPistaSquash1(null);
+	public Reserva removeReserva(Reserva reserva) {
+		getReservas().remove(reserva);
+		reserva.setPistaSquash(null);
 
-		return reservas1;
+		return reserva;
 	}
 
 }

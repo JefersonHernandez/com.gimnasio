@@ -5,6 +5,10 @@ import javax.persistence.*;
 import java.util.List;
 
 
+/**
+ * The persistent class for the APARATO_ESTADO database table.
+ * 
+ */
 @Entity
 @Table(name="APARATO_ESTADO")
 @NamedQuery(name="AparatoEstado.findAll", query="SELECT a FROM AparatoEstado a")
@@ -12,10 +16,9 @@ public class AparatoEstado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
-	
-	@Column(name="descripcion", length=200)
+
 	private String descripcion;
 
 	//bi-directional many-to-one association to Aparato

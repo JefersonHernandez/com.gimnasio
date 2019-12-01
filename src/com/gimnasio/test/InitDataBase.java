@@ -4,11 +4,13 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
+import com.gimnasio.entities.Administradores;
 import com.gimnasio.entities.Aparato;
 import com.gimnasio.entities.AparatoEstado;
 import com.gimnasio.entities.Asiste;
 import com.gimnasio.entities.AsistePK;
+//import com.gimnasio.entities.Asiste;
+//import com.gimnasio.entities.AsistePK;
 import com.gimnasio.entities.Clase;
 import com.gimnasio.entities.Monitor;
 import com.gimnasio.entities.PistaEstado;
@@ -19,9 +21,11 @@ import com.gimnasio.entities.ReservaPK;
 import com.gimnasio.entities.Sala;
 import com.gimnasio.entities.Socio;
 import com.gimnasio.entities.TipoSala;
+import com.gimnasio.model.AdministradoresDAO;
 import com.gimnasio.model.AparatoDAO;
 import com.gimnasio.model.AparatoEstadoDAO;
 import com.gimnasio.model.AsisteDAO;
+//import com.gimnasio.model.AsisteDAO;
 import com.gimnasio.model.ClaseDAO;
 import com.gimnasio.model.MonitorDAO;
 import com.gimnasio.model.PistaEstadoDAO;
@@ -36,8 +40,7 @@ public class InitDataBase {
 
 	public static void main(String args[]) {
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-		
-						
+
 		AparatoEstado aparatos[] = new AparatoEstado[3];
 
 		aparatos[0] = new AparatoEstado();
@@ -165,7 +168,7 @@ public class InitDataBase {
 		socios[0].setProfesion("Abogado");
 		socios[0].setDatosBancarios("bancolombia");
 		socios[0].setClave("0000");
-		
+
 		socios[1].setNombre("Richard");
 		socios[1].setDireccion("villa del rosario");
 		socios[1].setTelefono("544554");
@@ -247,17 +250,17 @@ public class InitDataBase {
 
 		clases[0].setSala(sdao.find(salas[0].getNumero()));
 		clases[0].setMonitor(mdao.find(monitores[0].getCodigo()));
-		clases[0].setDescripcion(predao.find(preparaciones[0].getCodigo()));
+		clases[0].setPreparacion(predao.find(preparaciones[0].getCodigo()));
 		clases[0].setHora(new Time(30, 20, 10));
 
 		clases[1].setSala(sdao.find(salas[1].getNumero()));
 		clases[1].setMonitor(mdao.find(monitores[1].getCodigo()));
-		clases[1].setDescripcion(predao.find(preparaciones[1].getCodigo()));
+		clases[1].setPreparacion(predao.find(preparaciones[1].getCodigo()));
 		clases[1].setHora(new Time(30, 20, 10));
 
 		clases[2].setSala(sdao.find(salas[2].getNumero()));
 		clases[2].setMonitor(mdao.find(monitores[2].getCodigo()));
-		clases[2].setDescripcion(predao.find(preparaciones[2].getCodigo()));
+		clases[2].setPreparacion(predao.find(preparaciones[2].getCodigo()));
 		clases[2].setHora(new Time(30, 20, 10));
 
 		try {
@@ -271,35 +274,28 @@ public class InitDataBase {
 		for (Clase clase : clases) {
 			cdao.insert(clase);
 		}
-
-		// insert Asiste
-		AsisteDAO asistedao = new AsisteDAO();
-		Asiste asiste[] = new Asiste[3];
-
-		asiste[0] = new Asiste();
-		asiste[1] = new Asiste();
-		asiste[2] = new Asiste();
-
-		AsistePK aspk0 = new AsistePK();
-		aspk0.setCodigoClase(cdao.find(clases[0].getCodigo()).getCodigo());
-		aspk0.setNumeroSocio(sociodao.find(socios[0].getNumero()).getNumero());
-
-		AsistePK aspk1 = new AsistePK();
-		aspk1.setCodigoClase(cdao.find(clases[1].getCodigo()).getCodigo());
-		aspk1.setNumeroSocio(sociodao.find(socios[1].getNumero()).getNumero());
-
-		AsistePK aspk2 = new AsistePK();
-		aspk2.setCodigoClase(cdao.find(clases[2].getCodigo()).getCodigo());
-		aspk2.setNumeroSocio(sociodao.find(socios[2].getNumero()).getNumero());
-
-		asiste[0].setId(aspk0);
-		asiste[1].setId(aspk1);
-		asiste[2].setId(aspk2);
-
-		for (Asiste asiste2 : asiste) {
-			asistedao.insert(asiste2);
-		}
-
+		/*
+		 * // insert Asiste AsisteDAO asistedao = new AsisteDAO(); Asiste asiste[] = new
+		 * Asiste[3];
+		 * 
+		 * asiste[0] = new Asiste(); asiste[1] = new Asiste(); asiste[2] = new Asiste();
+		 * 
+		 * AsistePK aspk0 = new AsistePK();
+		 * aspk0.setCodigoClase(cdao.find(clases[0].getCodigo()).getCodigo());
+		 * aspk0.setNumeroSocio(sociodao.find(socios[0].getNumero()).getNumero());
+		 * 
+		 * AsistePK aspk1 = new AsistePK();
+		 * aspk1.setCodigoClase(cdao.find(clases[1].getCodigo()).getCodigo());
+		 * aspk1.setNumeroSocio(sociodao.find(socios[1].getNumero()).getNumero());
+		 * 
+		 * AsistePK aspk2 = new AsistePK();
+		 * aspk2.setCodigoClase(cdao.find(clases[2].getCodigo()).getCodigo());
+		 * aspk2.setNumeroSocio(sociodao.find(socios[2].getNumero()).getNumero());
+		 * 
+		 * asiste[0].setId(aspk0); asiste[1].setId(aspk1); asiste[2].setId(aspk2);
+		 * 
+		 * for (Asiste asiste2 : asiste) { asistedao.insert(asiste2); }
+		 */
 		// insert Reserva
 		ReservaDAO reservaDao = new ReservaDAO();
 		Reserva reservas[] = new Reserva[3];
@@ -307,30 +303,30 @@ public class InitDataBase {
 		reservas[0] = new Reserva();
 		reservas[1] = new Reserva();
 		reservas[2] = new Reserva();
-		
+
 		ReservaPK rspk0 = new ReservaPK();
 		ReservaPK rspk1 = new ReservaPK();
 		ReservaPK rspk2 = new ReservaPK();
 
-		reservas[0].setSocio1(sociodao.find(socios[0].getNumero()));
-		reservas[0].setPistaSquash1(psdao.find(pistas[0].getNumero()));
+		reservas[0].setSocio(sociodao.find(socios[0].getNumero()));
+		reservas[0].setPistaSquash(psdao.find(pistas[0].getNumero()));
 		reservas[0].setHora(new Time(30, 20, 10));
 
-		reservas[1].setSocio1(sociodao.find(socios[1].getNumero()));
-		reservas[1].setPistaSquash1(psdao.find(pistas[1].getNumero()));
+		reservas[1].setSocio(sociodao.find(socios[1].getNumero()));
+		reservas[1].setPistaSquash(psdao.find(pistas[1].getNumero()));
 		reservas[1].setHora(new Time(25, 20, 10));
 
-		reservas[2].setSocio1(sociodao.find(socios[1].getNumero()));
-		reservas[2].setPistaSquash1(psdao.find(pistas[1].getNumero()));
+		reservas[2].setSocio(sociodao.find(socios[1].getNumero()));
+		reservas[2].setPistaSquash(psdao.find(pistas[1].getNumero()));
 		reservas[2].setHora(new Time(40, 20, 10));
-		
+
 		rspk0.setNumeroSocio(sociodao.find(socios[0].getNumero()).getNumero());
 		rspk0.setNumeroPista(psdao.find(pistas[0].getNumero()).getNumero());
 		rspk1.setNumeroSocio(sociodao.find(socios[1].getNumero()).getNumero());
 		rspk1.setNumeroPista(psdao.find(pistas[1].getNumero()).getNumero());
 		rspk2.setNumeroSocio(sociodao.find(socios[2].getNumero()).getNumero());
 		rspk2.setNumeroPista(psdao.find(pistas[2].getNumero()).getNumero());
-		
+
 		reservas[0].setId(rspk0);
 		reservas[1].setId(rspk1);
 		reservas[2].setId(rspk2);
@@ -347,27 +343,41 @@ public class InitDataBase {
 		for (Reserva reserva : reservas) {
 			reservaDao.insert(reserva);
 		}
-		Socio ss = new Socio();
-		Clase clase = new Clase();
-		ClaseDAO claseDao1 = new ClaseDAO();  
-		SocioDAO socioDao1 = new SocioDAO();
-		Asiste asiste1 = new Asiste();
-		AsisteDAO asisteDao = new AsisteDAO();
-		clase = claseDao1.find(clase.getCodigo());
-		ss = socioDao1.find(ss.getNumero());
-	/*
-		//System.out.print(ss.getClave());
-		asiste1.setSocio(ss);
-		asiste1.setClase(clase);
-		//asistePk.setCodigoClase(asiste.getSocio().getNumero());
-		//asistePk.setNumeroSocio(asiste.getClase().getCodigo());
-		//asiste.setId(asistePk);
-		ss.getAsiste().clear();
-		clase.getAsiste().clear();
-		asisteDao.delete(asiste1);
 
-		*/
+		// insert to ASISTE
+		// socios[0].addClase(clases[0]);
+		// clases[0].addSocio(socios[0]);
+		AsisteDAO asd = new AsisteDAO();
+		Asiste as = new Asiste();
+		Asiste as2 = new Asiste();
+		Asiste as3 = new Asiste();
+		AsistePK aspk = new AsistePK();
+		AsistePK aspk2 = new AsistePK();
+		AsistePK aspk3 = new AsistePK();
 		
+		aspk.setFkClase(clases[0].getCodigo());
+		aspk.setFkSocio(socios[0].getNumero());
+		aspk2.setFkClase(clases[0].getCodigo());
+		aspk2.setFkSocio(socios[1].getNumero());
+		aspk3.setFkClase(clases[1].getCodigo());
+		aspk3.setFkSocio(socios[0].getNumero());
+		
+		as.setId(aspk);
+		as2.setId(aspk2);
+		as3.setId(aspk3);
+		
+		asd.insert(as);		
+		asd.insert(as2);
+		asd.insert(as3);
+		//asd.delete(asd.find(aspk));
+		
+		Administradores admin = new Administradores();
+		
+		admin.setNombre("Admin #1");
+		admin.setClave("admin");
+		admin.setCodigo("admin");
+		AdministradoresDAO adminDao = new AdministradoresDAO();
+		adminDao.insert(admin);
 	}
 
 }

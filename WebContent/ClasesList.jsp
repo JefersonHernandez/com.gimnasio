@@ -9,154 +9,147 @@
 <%@include file="html/meta.html"%>
 </head>
 <body>
-	<div class="row">
-	
-		<div class="card col-md-8">
-			<aside class="col-md-4 lateral">
+	<jsp:useBean id="claseDao" class="com.gimnasio.model.ClaseDAO"></jsp:useBean>
+	<%@include file="html/header.html"%>
+	<%@include file="html/nav.html"%>
+	<div class="container">
+		<div class="row padding">
+			<div class="card col-md-8 margin">
+				<c:choose>
+					<c:when test="${rol_user == 1}">
+					<h2>Clases</h2>
+						<table class="table mb-5 table-hover table-borderless">
+							<thead>
+								<tr>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Codigo</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Dia</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Hora</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Descripcion</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Monitor</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Sala</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Opcion</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="n" items="${claseDao.list()}">
+									<tr>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.codigo}" /></td>
+
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.dia}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.hora}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.preparacion.descripcion}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.monitorBean.nombre}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.salaBean.numero}" /></td>
+										<td class="text-center font-weight-light text-white"><a 
+											href="AddClaseSocio?codigo_clase=${n.codigo}">Unirme</a></td>
+
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:when test="${rol_user == 2}"><h2>Clases</h2>
+						<table class="table mb-5 table-hover table-borderless">
+							<thead>
+								<tr>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase'>Descripcion</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase'>Dia</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase'>Hora</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase'>Sala</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase'>Monitor</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="n" items="${nDao.list()}">
+									<tr>
+										<td class="text-center font-weight-light"><c:out
+												value="${n.codigo}" /></td>
+										<td class="text-center font-weight-light"><c:out
+												value="${n.descripcion}" /></td>
+
+										<td class="text-center font-weight-light"><a
+											class="btn btn-danger"
+											href="DeleteEstadoAparato?codigo=${n.codigo}">Asistir</a></td>
+										<td class="text-center font-weight-light"><a
+											class="btn btn-info"
+											href="DeleteEstadoAparato?codigo=${n.codigo}">SD</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:when test="${rol_user == 3}"><h2>Clases</h2>
+						<table class="table mb-5 table-hover table-borderless">
+							<thead>
+								<tr>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Descripcion</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Dia</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Hora</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Sala</th>
+									<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Monitor</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="n" items="${claseDao.list()}">
+									<tr>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.codigo}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.dia}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.hora}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.preparacion.descripcion}" /></td>
+										<td class="text-center font-weight-light text-white"><c:out
+												value="${n.monitorBean.nombre}" /></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:otherwise>otro usuario</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="card col">
+			<h2>Opciones</h2>
 				<c:choose>
 					<c:when test="${socio!=null}">
 						<%@include file="html/aside.html"%>
 					</c:when>
+					<c:when test="${admin!=null}">
+						Cantidad de clases <c:out value="${claseDao.list().size()}"/>
+					</c:when>
 					<c:otherwise>
-						<%@include file="html/login.html"%>
+						sdsdsdsdsdsds
 					</c:otherwise>
 				</c:choose>
-			</aside>
+			</div>
 		</div>
-		<div class="card col-md-4">asa<h1>sd</h1></div>
-
+		<%@include file="html/footer.html"%>
 	</div>
 
-	<jsp:useBean id="claseDao" class="com.gimnasio.model.ClaseDAO"></jsp:useBean>
-
-	<%@include file="html/header.html"%>
-	<%@include file="html/nav.html"%>
-	<c:choose>
-		<c:when test="${rol_user == 1}">
-		</c:when>
-		<c:when test="${rol_user == 2}">
-			<a>it is an monitor</a>
-		</c:when>
-		<c:otherwise>
-			<a>it is an otro</a>
-		</c:otherwise>
-	</c:choose>
-
-
-
-
-
-	<div class="row father">
-		<section class="col-md-8 dashboard">
-			<c:choose>
-				<c:when test="${rol_user == 1}">
-					<table class="table mb-5 table-hover">
-						<thead class='bg-light'>
-							<tr class="table-info">
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Codigo</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Dia</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Hora</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Descripcion</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Monitor</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Sala</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Cancelar</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Update</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="n" items="${claseDao.list()}">
-								<tr>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.codigo}" /></td>
-
-									<td class="text-center font-weight-light"><c:out
-											value="${n.dia}" /></td>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.hora}" /></td>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.descripcion.descripcion}" /></td>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.monitor.nombre}" /></td>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.sala.numero}" /></td>
-
-									<td class="text-center font-weight-light"><a
-										class="btn btn-danger"
-										href="DeleteEstadoAparato?codigo=${n.codigo}">Unirme</a></td>
-									<td class="text-center font-weight-light"><a
-										class="btn btn-info"
-										href="DeleteEstadoAparato?codigo=${n.codigo}">editar</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:when>
-				<c:when test="${rol_user == 2}">
-					<table class="table mb-5 table-hover">
-						<thead class='bg-light'>
-							<tr class="table-info">
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Descripcion</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Dia</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Hora</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Sala</th>
-								<th scope='col'
-									class='border-0 text-primary text-center text-uppercase'>Monitor</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="n" items="${nDao.list()}">
-								<tr>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.codigo}" /></td>
-									<td class="text-center font-weight-light"><c:out
-											value="${n.descripcion}" /></td>
-
-									<td class="text-center font-weight-light"><a
-										class="btn btn-danger"
-										href="DeleteEstadoAparato?codigo=${n.codigo}">Asistir</a></td>
-									<td class="text-center font-weight-light"><a
-										class="btn btn-info"
-										href="DeleteEstadoAparato?codigo=${n.codigo}">SD</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:when>
-				<c:otherwise>
-					<a>it is an otro</a>
-				</c:otherwise>
-			</c:choose>
-		</section>
-
-		<aside class="col-md-4 lateral">
-			<c:choose>
-				<c:when test="${socio!=null}">
-					<%@include file="html/aside.html"%>
-				</c:when>
-				<c:otherwise>
-					<%@include file="html/login.html"%>
-				</c:otherwise>
-			</c:choose>
-		</aside>
-
-	</div>
-
-
-
-
-	<%@include file="html/footer.html"%>
 </body>
 </html>

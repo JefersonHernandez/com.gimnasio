@@ -16,26 +16,26 @@ public class Sala implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int numero;
 
 	@Column(name="metros_cuadrados")
 	private String metrosCuadrados;
 
-	@Column(name="ubicacion",length=200)
 	private String ubicacion;
 
 	//bi-directional many-to-one association to Aparato
 	@OneToMany(mappedBy="sala")
 	private List<Aparato> aparatos;
 
+	//bi-directional many-to-one association to Clase
+	@OneToMany(mappedBy="salaBean")
+	private List<Clase> clases;
+
 	//bi-directional many-to-one association to TipoSala
 	@ManyToOne
 	@JoinColumn(name="tipo_sala")
 	private TipoSala tipoSalaBean;
-	
-	@OneToMany(mappedBy = "sala")
-	private List<Clase> clase;
 
 	public Sala() {
 	}
@@ -86,20 +86,34 @@ public class Sala implements Serializable {
 		return aparato;
 	}
 
+	public List<Clase> getClases() {
+		return this.clases;
+	}
+
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
+	}
+
+	public Clase addClas(Clase clas) {
+		getClases().add(clas);
+		clas.setSala(this);
+
+		return clas;
+	}
+
+	public Clase removeClas(Clase clas) {
+		getClases().remove(clas);
+		clas.setSala(null);
+
+		return clas;
+	}
+
 	public TipoSala getTipoSalaBean() {
 		return this.tipoSalaBean;
 	}
 
 	public void setTipoSalaBean(TipoSala tipoSalaBean) {
 		this.tipoSalaBean = tipoSalaBean;
-	}
-
-	public List<Clase> getClase() {
-		return clase;
-	}
-
-	public void setClase(List<Clase> clase) {
-		this.clase = clase;
 	}
 
 }

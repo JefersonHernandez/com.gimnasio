@@ -12,25 +12,25 @@ public class ReservaPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="numero_socio", insertable=false, updatable=false)
-	private int numeroSocio;
-
 	@Column(name="numero_pista", insertable=false, updatable=false)
 	private int numeroPista;
 
+	@Column(name="numero_socio", insertable=false, updatable=false)
+	private int numeroSocio;
+
 	public ReservaPK() {
-	}
-	public int getNumeroSocio() {
-		return this.numeroSocio;
-	}
-	public void setNumeroSocio(int numeroSocio) {
-		this.numeroSocio = numeroSocio;
 	}
 	public int getNumeroPista() {
 		return this.numeroPista;
 	}
 	public void setNumeroPista(int numeroPista) {
 		this.numeroPista = numeroPista;
+	}
+	public int getNumeroSocio() {
+		return this.numeroSocio;
+	}
+	public void setNumeroSocio(int numeroSocio) {
+		this.numeroSocio = numeroSocio;
 	}
 
 	public boolean equals(Object other) {
@@ -42,15 +42,15 @@ public class ReservaPK implements Serializable {
 		}
 		ReservaPK castOther = (ReservaPK)other;
 		return 
-			(this.numeroSocio == castOther.numeroSocio)
-			&& (this.numeroPista == castOther.numeroPista);
+			(this.numeroPista == castOther.numeroPista)
+			&& (this.numeroSocio == castOther.numeroSocio);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.numeroSocio;
 		hash = hash * prime + this.numeroPista;
+		hash = hash * prime + this.numeroSocio;
 		
 		return hash;
 	}

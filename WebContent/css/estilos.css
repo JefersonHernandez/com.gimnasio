@@ -1,25 +1,31 @@
 body{
-	background-color:whitesmoke;
+	background-image: url("../img/mnas.jpg");
+	background-color: transparent;
+	background-repeat: repeat-y;
+	color:white;
 }
-.father {
-	margin-left: 10px;
-	margin-right: 10px;
+h2{
+	color: white;
 }
-
-.dashboard {/*background-color: #F0FFFF	;*/
-	
-	padding: 10px;
-}
-
-aside {
-	/*background-color: #7FFFD4;*/
-	
-	padding: 10px;
+.padding{
+	padding:10px;background-color: transparent;
 }
 
-.lateral{/*background-color: gray;*/
-	
+table{	
+	background-color: transparent !important;
 }
-.my-note{
-	background-color: green;
+.margin{
+	margin-right:10px;
+}
+
+.card{
+	background-color: transparent !important
+	;
+}
+
+footer{
+	color: #fff; min-height: 100px; padding: 65px; width: 100%;
+}
+footer p{
+	 font-size: 1.8rem;
 }

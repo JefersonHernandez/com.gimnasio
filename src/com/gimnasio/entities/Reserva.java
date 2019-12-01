@@ -1,9 +1,8 @@
 package com.gimnasio.entities;
 
 import java.io.Serializable;
-import java.sql.Time;
-
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -25,10 +24,12 @@ public class Reserva implements Serializable {
 
 	private Time hora;
 
+	//bi-directional many-to-one association to PistaSquash
 	@ManyToOne
 	@JoinColumn(name="numero_pista",insertable=false, updatable=false)
 	private PistaSquash pistaSquash;
-	
+
+	//bi-directional many-to-one association to Socio
 	@ManyToOne
 	@JoinColumn(name="numero_socio",insertable=false, updatable=false)
 	private Socio socio;
@@ -60,22 +61,20 @@ public class Reserva implements Serializable {
 		this.hora = hora;
 	}
 
-	public PistaSquash getPistaSquash1() {
+	public PistaSquash getPistaSquash() {
 		return this.pistaSquash;
 	}
 
-	public void setPistaSquash1(PistaSquash pistaSquash1) {
-		this.pistaSquash = pistaSquash1;
-	}	
+	public void setPistaSquash(PistaSquash pistaSquash) {
+		this.pistaSquash = pistaSquash;
+	}
 
-	public Socio getSocio1() {
+	public Socio getSocio() {
 		return this.socio;
 	}
 
-	public void setSocio1(Socio socio1) {
-		this.socio = socio1;
+	public void setSocio(Socio socio) {
+		this.socio = socio;
 	}
-
-	
 
 }

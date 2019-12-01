@@ -3,8 +3,7 @@
 	<persistence-unit name="gimnasio">
 		<class>com.gimnasio.entities.Aparato</class>
 		<class>com.gimnasio.entities.AparatoEstado</class>
-		<class>com.gimnasio.entities.Asiste</class>
-		<class>com.gimnasio.entities.AsistePK</class>
+		<class>com.gimnasio.entities.Clase</class>
 		<class>com.gimnasio.entities.Monitor</class>
 		<class>com.gimnasio.entities.PistaEstado</class>
 		<class>com.gimnasio.entities.PistaSquash</class>
@@ -14,7 +13,9 @@
 		<class>com.gimnasio.entities.Sala</class>
 		<class>com.gimnasio.entities.Socio</class>
 		<class>com.gimnasio.entities.TipoSala</class>
-		<class>com.gimnasio.entities.Clase</class>
+		<class>com.gimnasio.entities.Asiste</class>
+		<class>com.gimnasio.entities.AsistePK</class>
+		<class>com.gimnasio.entities.Administradores</class>
 
 		
 		<properties>
@@ -26,11 +27,12 @@
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
 
+
  <!-- 
  
  <property name="javax.persistence.schema-generation.database.action"
 				value="drop-and-create" />
- 
+ <property name="hibernate.hbm2ddl.auto" value="validate" />
   -->
 	
 	<!-- Hibernate properties -->
@@ -38,7 +40,7 @@
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			
 	</properties>	
 	</persistence-unit>
 </persistence>

@@ -16,8 +16,10 @@ public class Socio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int numero;
+
+	private String clave;
 
 	@Column(name="datos_bancarios")
 	private String datosBancarios;
@@ -29,15 +31,14 @@ public class Socio implements Serializable {
 	private String profesion;
 
 	private String telefono;
-	
-	@Column(name="clave")
-	private String clave;
 
+	//bi-directional many-to-many association to Clase
+	@ManyToMany(mappedBy="socios")
+	private List<Clase> clases;
+
+	//bi-directional many-to-one association to Reserva
 	@OneToMany(mappedBy="socio")
-	private List<Reserva> reservas1;
-	
-	@OneToMany(mappedBy = "socio")
-	private List<Asiste> asiste;
+	private List<Reserva> reservas;
 
 	public Socio() {
 	}
@@ -48,6 +49,14 @@ public class Socio implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getClave() {
+		return this.clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 
 	public String getDatosBancarios() {
@@ -90,44 +99,41 @@ public class Socio implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public List<Reserva> getReservas1() {
-		return this.reservas1;
+	public List<Clase> getClases() {
+		return this.clases;
 	}
 
-	public void setReservas1(List<Reserva> reservas1) {
-		this.reservas1 = reservas1;
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
 	}
 
-	public Reserva addReservas1(Reserva reservas1) {
-		getReservas1().add(reservas1);
-		reservas1.setSocio1(this);
-
-		return reservas1;
+	public List<Reserva> getReservas() {
+		return this.reservas;
 	}
 
-	public Reserva removeReservas1(Reserva reservas1) {
-		getReservas1().remove(reservas1);
-		reservas1.setSocio1(null);
-
-		return reservas1;
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 
-	public List<Asiste> getAsiste() {
-		return asiste;
+	public Reserva addReserva(Reserva reserva) {
+		getReservas().add(reserva);
+		reserva.setSocio(this);
+
+		return reserva;
 	}
 
-	public void setAsiste(List<Asiste> asiste) {
-		this.asiste = asiste;
-	}
+	public Reserva removeReserva(Reserva reserva) {
+		getReservas().remove(reserva);
+		reserva.setSocio(null);
 
-	public String getClave() {
-		return clave;
+		return reserva;
 	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-
 	
+	public Clase removeClase(Clase clase) {
+		this.clases.remove(clase);
+		//clase.setSocios(null);
+		return clase;
+	}
+
 
 }

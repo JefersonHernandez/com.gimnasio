@@ -15,26 +15,23 @@ import java.util.List;
 public class Monitor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id	
 	private String codigo;
 
-	@Column(name="experiencia",length=50)
+	private String clave;
+
 	private String experiencia;
-	
-	@Column(name="nombre",length=200)
+
 	private String nombre;
 
-	@Column(name="telefono",length=10)
 	private String telefono;
 
-	@Column(name="titulo",length=200)
 	private String titulo;
-	
-	@OneToMany(mappedBy = "monitor")
+
+	//bi-directional many-to-one association to Clase
+	@OneToMany(mappedBy="monitorBean", cascade = CascadeType.ALL)
 	private List<Clase> clases;
-	
-	@Column(name="clave")
-	private String clave;
+
 	public Monitor() {
 	}
 
@@ -44,6 +41,14 @@ public class Monitor implements Serializable {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getClave() {
+		return this.clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 
 	public String getExperiencia() {
@@ -79,22 +84,25 @@ public class Monitor implements Serializable {
 	}
 
 	public List<Clase> getClases() {
-		return clases;
+		return this.clases;
 	}
 
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
 	}
 
-	public String getClave() {
-		return clave;
+	public Clase addClas(Clase clas) {
+		getClases().add(clas);
+		clas.setMonitor(this);
+
+		return clas;
 	}
 
-	public void setClave(String clave) {
-		this.clave = clave;
+	public Clase removeClas(Clase clas) {
+		getClases().remove(clas);
+		clas.setMonitor(null);
+
+		return clas;
 	}
 
-	
-
-	
 }

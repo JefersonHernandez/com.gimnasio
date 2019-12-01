@@ -10,26 +10,48 @@
 		<a class="navbar-brand" href="index.jsp">Gimnasio</a>
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0 col-md-10">
 
-			<c:if test="${socio != null}">
 
-				<li class="nav-item"><a class="nav-link" href="ClasesList.jsp">Clases</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="ClasesSocioList.jsp">Mis Clases</span>
-				</a></li>
-			</c:if>
+			<c:choose>
+				<c:when test="${socio!=null}">
+					<li class="nav-item"><a class="nav-link" href="ClasesList.jsp">Clases</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="ClasesSocioList.jsp">Mis Clases</span>
+					</a></li>
+				</c:when>
+				<c:when test="${admin!=null}">
+					<li class="nav-item"><a class="nav-link"
+						href="AparatosList.jsp">Aparatos</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="SalaList.jsp">Salas</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="MonitorList.jsp">Monitores</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="SocioList.jsp">Socios</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="ClasesList.jsp">Clases</span>
+					</a></li>
+				</c:when>
+				<c:when test="${monitor!=null}">
+					<li class="nav-item"><a class="nav-link"
+						href="AparatosList.jsp">lkj</span>
+					</a></li>
+					
+				</c:when>
+			</c:choose>
 		</ul>
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			
-			<c:choose>
 
-				<c:when test="${socio ==null}">
-					<li class="nav-item"><a class="nav-link" href="Login.jsp">Iniciar
+			<c:choose>
+				<c:when test="${socio!=null || admin != null || monitor!=null}">
+					<li class="nav-item"><a class="nav-link" href="CerrarSesion">Cerrar
 							Sesion</span>
 					</a></li>
 				</c:when>
 
 				<c:otherwise>
-					<li class="nav-item"><a class="nav-link" href="CerrarSesion">Cerrar
+					<li class="nav-item"><a class="nav-link" href="Login.jsp">Iniciar
 							Sesion</span>
 					</a></li>
 				</c:otherwise>

@@ -16,10 +16,9 @@ public class PistaEstado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 
-	@Column(name="descripcion")
 	private String descripcion;
 
 	//bi-directional many-to-one association to PistaSquash
