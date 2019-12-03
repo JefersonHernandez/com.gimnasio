@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+<jsp:useBean id="nDao" class="com.gimnasio.model.SocioDAO"></jsp:useBean>
 
 	<%@include file="html/header.html"%>
 	<%@include file="html/nav.html"%>
@@ -18,7 +19,7 @@
 			<div class="card col-md-8 margin">
 				<c:choose>
 					<c:when test="${rol_user == 1}">
-						<table class="table mb-5 table-hover">
+						<table class="table table-hover table-borderless">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -35,32 +36,25 @@
 										class='border-0 text-primary text-center text-uppercase text-warning'>Sala</th>
 									<th scope='col'
 										class='border-0 text-primary text-center text-uppercase text-warning'>Cancelar</th>
-
-
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="n" items="${socio.clases}">
+								<c:forEach var="n" items="${nDao.find(socio.numero).clases}">
 									<tr>
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.codigo}" /></td>
-
-
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.dia}" /></td>
-
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.hora}" /></td>
-
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.preparacion.descripcion}" /></td>
-
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.monitorBean.nombre}" /></td>
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.salaBean.numero}" /></td>
 										<td class="text-center font-weight-light"><a class="text-danger"
-											href="DeleteClaseSocio?codigo_clase=${n.codigo }">Cancelar</a></td>
+											href="DeleteClaseSocio?codigo_clase=${n.codigo }">Cancelar Clase</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

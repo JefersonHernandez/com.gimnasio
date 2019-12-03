@@ -13,9 +13,8 @@
 	<%@include file="html/nav.html"%>
 	
 	<div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class=" card col-md-4">
+    
+    <div class="card col-md-4 mx-auto">
         <!-- Default form login -->
         <form class="text-center p-5" method="post" action="LoginController">
             <h2 class="h4 mb-4" >Iniciar Sesion</h2>
@@ -57,8 +56,7 @@
             </p>
         </form>
     </div>
-    <div class="col-md-4">
-    </div>
+   
 
 </div>
 	

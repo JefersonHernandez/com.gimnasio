@@ -380,4 +380,6 @@ public class InitDataBase {
 		adminDao.insert(admin);
 	}
 
+	
+
 }

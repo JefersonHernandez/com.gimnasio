@@ -1,6 +1,8 @@
 package com.gimnasio.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,18 +40,24 @@ public class DeleteClaseSocio extends HttpServlet {
 
 		HttpSession misession;
 		misession = request.getSession(true);
-		Socio ss = (Socio) misession.getAttribute("socio");
+		
+		Socio socio = (Socio) misession.getAttribute("socio");
 		ClaseDAO claseDao = new ClaseDAO();
 		SocioDAO socioDao = new SocioDAO();
 		AsisteDAO asisteDao = new AsisteDAO();
 		Asiste asiste = new Asiste();
 		AsistePK asistePk = new AsistePK();
 		asistePk.setFkClase(claseDao.find(Integer.parseInt(request.getParameter("codigo_clase"))).getCodigo());
-		asistePk.setFkSocio(socioDao.find(ss.getNumero()).getNumero());
+		asistePk.setFkSocio(socioDao.find(socio.getNumero()).getNumero());
 		asiste.setId(asistePk);
 		asisteDao.delete(asisteDao.find(asistePk));
-
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		
+		misession.removeAttribute("socio");
+		//misession.setAttribute("socio", socioDao.find(socio.getNumero()));
+		//misession.putValue("socio", socioDao.find(socio.getNumero()));
+		//response.sendRedirect(request.getContextPath() + "/index.jsp");
+		//RequestDispatcher r = getServletContext().getRequestDispatcher("/index.jsp");
+		//r.forward(request, response);
 	}
 
 	/**

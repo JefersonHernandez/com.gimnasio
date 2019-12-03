@@ -33,7 +33,7 @@ public class Socio implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-many association to Clase
-	@ManyToMany(mappedBy="socios")
+	@ManyToMany(mappedBy="socios", fetch = FetchType.EAGER )
 	private List<Clase> clases;
 
 	//bi-directional many-to-one association to Reserva

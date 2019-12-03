@@ -61,6 +61,7 @@
 			</div>
 			<div class="card col">
 			<h2>Opciones</h2>
+			<a href="#">Agregar Socio</a>
 			</div>
 		</div>
 		<%@include file="html/footer.html"%>

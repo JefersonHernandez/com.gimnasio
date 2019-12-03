@@ -29,15 +29,18 @@ public class CerrarSesion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 
-		HttpSession misession = request.getSession(true);
+		HttpSession misession = request.getSession();
+		misession.invalidate();
+		/*
 		if (misession.getAttribute("socio") != null) {
 			misession.removeAttribute("socio");
 		} else if (misession.getAttribute("admin") != null) {
 			misession.removeAttribute("admin");
 		} else if (misession.getAttribute("monitor") != null) {
 			misession.removeAttribute("monitor");
-		}
+		}*/
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 

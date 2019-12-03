@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession misession;
-		misession = request.getSession(true);
+		misession = request.getSession();
 		String tipoUsuario = request.getParameter("tipo_usuario");
 		String usuario = request.getParameter("documento");
 		String clave = request.getParameter("clave");

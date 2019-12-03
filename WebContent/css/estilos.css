@@ -19,8 +19,12 @@ table{
 }
 
 .card{
-	background-color: transparent !important
-	;
+	background-color: transparent !important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.card-img-own{
+	width: 15rem;
 }
 
 footer{
