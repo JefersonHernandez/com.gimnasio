@@ -14,10 +14,10 @@
 
 	<div class="container">
 		<div class="row padding">
-			<div class=" card col-md-8 margin">
+			<div class=" card col-12 col-sm-8 margin">
 				<h2>Aparatos</h2>
 
-				<table class="table mb-0 table-hover table-borderless">
+				<table class="table mb-0 table-hover table-borderless table-responsive table-striped">
 					<thead>
 						<tr>
 							<th scope='col'
@@ -45,7 +45,7 @@
 										value="${n.sala.numero}" /></td>
 								<td class="text-center font-weight-light text-white"><a
 									href="DeleteAparato?codigo_aparato=${n.codigo }"
-									class="text-danger" href="#">Eliminar</a></td>
+									class="btn btn-danger btn-sm" href="#">Eliminar</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -55,9 +55,9 @@
 			<div class="card col">
 				<h2>Opciones</h2>
 
-				<div class="">
-					<a href="AgregarAparato.jsp">Agregar Aparado</a>
-				</div>
+				
+					<a class="btn btn-info btn-sm" href="AgregarAparato.jsp">Agregar Aparado</a>
+				
 
 			</div>
 		</div>

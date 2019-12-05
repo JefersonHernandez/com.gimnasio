@@ -14,8 +14,8 @@
 	<div class="container">
 		<div class="row padding">
 			<div class="card col-md-8 margin">
-			<h2>Salas</h2>
-				<table class="table mb-5 table-hover table-borderless">
+				<h2>Salas</h2>
+				<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 					<thead>
 						<tr>
 							<th scope='col'
@@ -44,16 +44,20 @@
 										value="${n.ubicacion}" /></td>
 								<td class="text-center font-weight-light text-white"><c:out
 										value="${n.tipoSalaBean.descripcion}" /></td>
-								<td class="text-center font-weight-light text-white	"><a class="text-danger"
-									href="#">Eliminar</a></td>
+								<td class="text-center font-weight-light text-white	">
+									<form action="SalaController" method="POST">
+										<input name="method" type="hidden" value="DELETE">
+										<input name="id_sala" type="hidden"value="${n.numero }">
+										<button class="btn btn-danger btn-sm"type="submit">Eliminar</button>
+									</form></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 			<div class="card col">
-			<h2>Opciones</h2>
-			<a href="AgregarSala.jsp">Agregar Sala</a>
+				<h2>Opciones</h2>
+				<a  class="btn btn-info btn-sm" href="AgregarSala.jsp">Agregar Sala</a>
 			</div>
 		</div>
 		<%@include file="html/footer.html"%>

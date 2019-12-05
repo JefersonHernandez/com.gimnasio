@@ -18,8 +18,8 @@
 		<div class="row padding">
 			<div class="card col-md-8 margin">
 				<c:choose>
-					<c:when test="${rol_user == 1}">
-						<table class="table table-hover table-borderless">
+					<c:when test="${socio != null}">
+						<table class="table table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -53,7 +53,7 @@
 												value="${n.monitorBean.nombre}" /></td>
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.salaBean.numero}" /></td>
-										<td class="text-center font-weight-light"><a class="text-danger"
+										<td class="text-center font-weight-light"><a class=" btn btn-danger btn-sm"
 											href="DeleteClaseSocio?codigo_clase=${n.codigo }">Cancelar Clase</a></td>
 									</tr>
 								</c:forEach>
@@ -61,7 +61,7 @@
 						</table>
 					</c:when>
 					<c:when test="${rol_user == 2}">
-						<table class="table mb-5 table-hover">
+						<table class="table mb-5 table-hover table-responsive table-striped">
 							<thead class='bg-light'>
 								<tr class="table-info">
 									<th scope='col'

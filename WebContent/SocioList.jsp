@@ -15,7 +15,7 @@
 		<div class="row padding">
 			<div class="card col-md-8 margin">
 			<h2>Socios</h2>
-				<table class="table mb-5 table-hover table-borderless">
+				<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 					<thead>
 						<tr>
 							<th scope='col'
@@ -51,8 +51,14 @@
 										value="${n.profesion}" /></td>
 								<td class="text-center font-weight-light text-white"><c:out
 										value="${n.telefono}" /></td>
-								<td class="text-center font-weight-light text-white"><a class="text-danger"
-									href="#">Eliminar</a></td>
+								<td class="text-center font-weight-light text-white">
+								
+								<form action="SocioController" method="post">
+									<input type="hidden" name="method" value="DELETE">
+									<input type="hidden" name="socio_codigo" value="${n.numero }">
+									<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+								</form>
+								</td>
 
 							</tr>
 						</c:forEach>
@@ -61,7 +67,7 @@
 			</div>
 			<div class="card col">
 			<h2>Opciones</h2>
-			<a href="#">Agregar Socio</a>
+			<a class="btn btn-info btn-sm" href="AgregarSocio.jsp">Agregar Socio</a>
 			</div>
 		</div>
 		<%@include file="html/footer.html"%>

@@ -13,26 +13,34 @@
 		class="com.gimnasio.model.AparatoEstadoDAO"></jsp:useBean>
 	<jsp:useBean id="salaDao" class="com.gimnasio.model.SalaDAO"></jsp:useBean>
 	<%@include file="html/nav.html"%>
-	<div class="row">
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
+
+	<div class="">
+
+		<div class="card col-11 col-sm-4 mx-auto">
 			<form action="AddAparato" method="post">
+
+
+
+
+
 				<fieldset>
 					<legend>Imformacion Aparato</legend>
-					<div class="form-group row">
-						<div class="col-md-6">
-							<label class="col-md-4">Estado</label>
+	
+
+					<div class="form-group row  text-center">
+						<div class="col-12 col-sm-6">
+							<label class="col-12 col-sm-12">Estado</label>
 						</div>
-						<div class="col-md-6">
-							<select name="estado" class="col-md-12">
+						<div class="col-12 col-sm-6 text-white text-center">
+							<select name="estado" class="col">
 								<c:forEach var="n" items="${aparatoEstadoDao.list() }">
 									<option value="${n.codigo}">${n.descripcion }</option>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
-					<div class="form-group row">
-						<div class="col-md-6">
+					<div class="form-group row text-white text-center">
+						<div class="col-12 col-sm-6">
 							<label class="col-md-12">Ubicar En Sala</label>
 						</div>
 						<div class="col-md-6">
@@ -44,18 +52,22 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<textarea name="descripcion" placeholder="Descripcion"
-							class="form-control" required></textarea>
+						<textarea name="descripcion" class="form-control"
+							placeholder="Ingrese un Nombre o descripcion de aparato EJ: MANCUERNA"
+							required></textarea>
 					</div>
 					<div class="form-group">
-						<button type="submit">Guardar</button>
+						<button type="submit" class="btn btn-info btn-sm col-md-12">Guardar</button>
 					</div>
 				</fieldset>
-
 			</form>
 		</div>
 
 	</div>
+	
+	
+
+	
 	<%@include file="html/footer.html"%>
 </body>
 </html>

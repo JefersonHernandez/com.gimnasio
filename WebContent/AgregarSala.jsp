@@ -13,9 +13,9 @@
 	<%@include file="html/nav.html"%>
 	<div class="container">
 		<div class="row padding">
-			<div class="col-md-3"></div>
-			<div class="card col-md-6 margin">
-				<form action="" method="post">
+			
+			<div class="card col-11 col-sm-4 margin mx-auto">
+				<form action="AddSala" method="post">
 					<fieldset>
 						<legend>Agregar Sala</legend>
 						<div class="form-group">
@@ -27,7 +27,7 @@
 								required />
 						</div>
 						<div class="form-group row">
-						<div class="col-md-6">
+						<div class="col col-sm-6 text-center">
 							<label class="col">Tipo Sala</label>
 						</div>
 						<div class="col-md-6">
@@ -38,8 +38,8 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group">
-							<button type="submit">Guardar</button>
+					<div class="form-group ">
+							<button class="btn btn-info btn-sm col-md-12" type="submit">Guardar</button>
 						</div>
 					</fieldset>
 				</form>

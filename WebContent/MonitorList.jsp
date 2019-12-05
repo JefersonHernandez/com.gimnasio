@@ -15,7 +15,7 @@
 		<div class="row padding">
 			<div class="card col-md-8 margin">
 			<h2>Monitores</h2>
-				<table class="table mb-5 table-hover table-borderless">
+				<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 					<thead>
 						<tr>
 							<th scope='col'
@@ -46,8 +46,15 @@
 										value="${n.titulo}" /></td>
 								<td class="text-center font-weight-light text-white"><c:out
 										value="${n.telefono}" /></td>
-								<td class="text-center font-weight-light"><a class="text-danger"
-									href="#">Eliminar</a></td>
+								<td class="text-center font-weight-light">
+								<form action="MonitorController" method="post">
+								<input type="hidden" name="method" value="DELETE">
+								<input type="hidden" name="codigo_monitor" value="${n.codigo }">
+								<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+								</form>
+					
+									
+									</td>
 
 							</tr>
 						</c:forEach>
@@ -56,7 +63,7 @@
 			</div>
 			<div class="card col">
 			<h2>Opciones</h2>
-				<a href="#">Agregar Monitor</a>
+				<a class="btn btn-info btn-sm" href="AgregarMonitor.jsp">Agregar Monitor</a>
 			</div>
 		</div>
 		<%@include file="html/footer.html"%>

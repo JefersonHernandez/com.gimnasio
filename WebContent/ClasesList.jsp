@@ -14,11 +14,12 @@
 	<%@include file="html/nav.html"%>
 	<div class="container">
 		<div class="row padding">
-			<div class="card col-md-8 margin">
+			<div class="card col-12 col-sm-8 margin">
 				<c:choose>
-					<c:when test="${rol_user == 1}">
+					<c:when test="${socio != null}">
 					<h2>Clases</h2>
-						<table class="table mb-5 table-hover table-borderless">
+				
+						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -53,7 +54,7 @@
 												value="${n.monitorBean.nombre}" /></td>
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.salaBean.numero}" /></td>
-										<td class="text-center font-weight-light text-white"><a 
+										<td class="text-center font-weight-light text-white"><a class="btn btn-info btn-sm"
 											href="AddClaseSocio?codigo_clase=${n.codigo}">Unirme</a></td>
 
 									</tr>
@@ -62,7 +63,7 @@
 						</table>
 					</c:when>
 					<c:when test="${rol_user == 2}"><h2>Clases</h2>
-						<table class="table mb-5 table-hover table-borderless">
+						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -96,8 +97,8 @@
 							</tbody>
 						</table>
 					</c:when>
-					<c:when test="${rol_user == 3}"><h2>Clases</h2>
-						<table class="table mb-5 table-hover table-borderless">
+					<c:when test="${admin =! null}"><h2>Clases</h2>
+						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -110,6 +111,8 @@
 										class='border-0 text-primary text-center text-uppercase text-warning'>Sala</th>
 									<th scope='col'
 										class='border-0 text-primary text-center text-uppercase text-warning'>Monitor</th>
+										<th scope='col'
+										class='border-0 text-primary text-center text-uppercase text-warning'>Opcion</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -125,6 +128,15 @@
 												value="${n.preparacion.descripcion}" /></td>
 										<td class="text-center font-weight-light text-white"><c:out
 												value="${n.monitorBean.nombre}" /></td>
+										<td class="text-center font-weight-light text-white">
+										
+											<form action="ClaseController" method="post">
+												<input type="hidden" name="method" value="DELETE">
+												<input type="hidden" name="clase" value="${n.codigo }">
+												<button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+											</form>
+										
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -141,6 +153,8 @@
 					</c:when>
 					<c:when test="${admin!=null}">
 						Cantidad de clases <c:out value="${claseDao.list().size()}"/>
+						<a class="btn btn-info btn-sm" href="AgregarClase.jsp">Agregar Clase</a>
+
 					</c:when>
 					<c:otherwise>
 						sdsdsdsdsdsds

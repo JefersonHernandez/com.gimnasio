@@ -55,67 +55,83 @@ public class LoginController extends HttpServlet {
 		String usuario = request.getParameter("documento");
 		String clave = request.getParameter("clave");
 
-		if (tipoUsuario.equals("SOCIO")) {
-			SocioDAO socioDao = new SocioDAO();
-			Socio socio = socioDao.find(Integer.parseInt(usuario));
-
-			if (socio != null) {// if user exist
-
+		if (tipoUsuario.equals("ADMINISTRADOR")) {
+			AdministradoresDAO adminDao = new AdministradoresDAO();
+			Administradores admin = adminDao.find(usuario);
+			if (admin != null) {
 				try {
+
+					if (!admin.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
+						// database pass)
+						throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
+					}
+
+					misession.setAttribute("admin", admin);
+					// misession.setAttribute("rol_user", 3);
+					response.sendRedirect(request.getContextPath() + "/index.jsp");
+				} catch (Exception e) {
+					misession.setAttribute("fail_login", e.getMessage());
+					response.sendRedirect(request.getContextPath() + "/Login.jsp");
+				}
+			} else {
+				misession.setAttribute("error_msg", "Error");
+				response.sendRedirect(request.getContextPath() + "/ErrorPage.jsp");
+
+			}
+
+		} else if (tipoUsuario.equals("SOCIO")) {
+			SocioDAO socioDao = new SocioDAO();
+			try {
+				Socio socio = socioDao.find(Integer.parseInt(usuario));
+
+				if (socio != null) {// if user exist
+
 					if (!socio.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
 															// database pass)
 						throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
 					}
 
 					misession.setAttribute("socio", socio);
-					misession.setAttribute("rol_user", 1);
+					// misession.setAttribute("rol_user", 1);
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
-				} catch (ExceptionInvalidUser e) {
 
-					misession.setAttribute("fail_login", e.getMessage());
-					response.sendRedirect(request.getContextPath() + "/Login.jsp");
+				} else {
+					misession.setAttribute("error_msg", "Error");
+					response.sendRedirect(request.getContextPath() + "/ErrorPage.jsp");
 				}
 
-			} else {
-				
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} catch (ExceptionInvalidUser e) {
+
+				misession.setAttribute("fail_login", e.getMessage());
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			} catch (NumberFormatException e) {
+				misession.setAttribute("fail_login", "Tipo de usuario Incorrecto");
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
 			}
 
 		} else if (tipoUsuario.equals("MONITOR")) {
 			MonitorDAO monitorDao = new MonitorDAO();
 			Monitor monitor = monitorDao.find(usuario);
-			try {
-				if (!monitor.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
-					// database pass)
-					throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
-				}
+			if (monitor != null) {
+				try {
+					if (!monitor.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
+						// database pass)
+						throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
+					}
 
-				misession.setAttribute("monitor", monitor);
-				misession.setAttribute("rol_user", 2);
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} catch (Exception e) {
-				misession.setAttribute("fail_login", e.getMessage());
-				response.sendRedirect(request.getContextPath() + "/Login.jsp");
-			}
-		} else if (tipoUsuario.equals("ADMINISTRADOR")) {
-			AdministradoresDAO adminDao = new AdministradoresDAO();
-			Administradores admin = adminDao.find(usuario);
-			try {
-				if (!admin.getClave().equals(clave)) {// if user pass don't match correctly (local pass with
-					// database pass)
-					throw new ExceptionInvalidUser("Usuario o Clave Incorrecta");
+					misession.setAttribute("monitor", monitor);
+					// misession.setAttribute("rol_user", 2);
+					response.sendRedirect(request.getContextPath() + "/index.jsp");
+				} catch (Exception e) {
+					misession.setAttribute("fail_login", e.getMessage());
+					response.sendRedirect(request.getContextPath() + "/Login.jsp");
 				}
-
-				misession.setAttribute("admin", admin);
-				misession.setAttribute("rol_user", 3);
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} catch (Exception e) {
-				misession.setAttribute("fail_login", e.getMessage());
-				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			} else {
+				misession.setAttribute("error_msg", "Error");
+				response.sendRedirect(request.getContextPath() + "/ErrorPage.jsp");
 			}
 
 		}
-		// response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
 }

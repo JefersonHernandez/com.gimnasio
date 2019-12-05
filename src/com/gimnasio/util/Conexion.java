@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import javax.persistence.PersistenceException;
+
 public class Conexion<T> {
 	private Class<T> c;
 	private static EntityManager em = null;
@@ -49,6 +51,8 @@ public class Conexion<T> {
 			em.getTransaction().begin();
 			em.persist(obj);
 			em.getTransaction().commit();
+		
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -75,7 +79,7 @@ public class Conexion<T> {
 			em.getTransaction().begin();
 			em.remove(obj);
 			em.getTransaction().commit();
-		} catch (Exception e) {
+				} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			//em.close();

@@ -26,6 +26,12 @@
 		</plugins>
 	</build>
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/mail/mail -->
+<dependency>
+    <groupId>org.wildfly.swarm</groupId>
+    <artifactId>mail</artifactId>
+    <version>2018.2.0.Final</version>
+</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
@@ -34,7 +40,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.6</version>
+			<version>5.1.39</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -43,13 +49,13 @@
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
-	    <artifactId>jstl</artifactId>
-	    <version>1.2</version>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
-        <groupId>taglibs</groupId>
-        <artifactId>standard</artifactId>
-        <version>1.1.2</version>
-    </dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 	</dependencies>
 </project>
