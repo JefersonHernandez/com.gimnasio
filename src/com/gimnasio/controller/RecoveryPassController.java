@@ -62,7 +62,7 @@ public class RecoveryPassController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String opcion = request.getParameter("opcion");
-		//HttpSession sesion = request.getSession(true);
+		
 		SocioDAO sDao = new SocioDAO();
 		Socio s;
 		if (opcion.equals("CHANGE_PASS")) {
@@ -71,21 +71,16 @@ public class RecoveryPassController extends HttpServlet {
 			doGet(request, response);
 
 		} else if (opcion.equals("RECOVERY_PASS")) {
-			//System.out.println("#################");
 			s = sDao.find(Integer.parseInt(request.getParameter("codigo")));
-			//sesion.setAttribute("recovery_user_pass", s);
-			//System.out.println(s.getDireccion());
-			
-			//System.out.println(s.getNumero());
+		
 
 			ServicioEmail sEmail = new ServicioEmail("jefersonurielhc@ufps.edu.co", "dvhawulugeuevjee");
 			sEmail.enviarEmail(s.getDireccion(), "Gimnasio en Forma Cambio de Clave", "solicitaste un cambio de clave haz click en el siguiente enlace "
-					+ "http://192.168.0.28:8080/com.gimnasioenforma" + "/SetNewPass.jsp");
+					+ "http://18.225.6.92:8080/com.gimnasio" + "/SetNewPass.jsp");
 
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 
-		//doGet(request, response);
 	}
 
 }

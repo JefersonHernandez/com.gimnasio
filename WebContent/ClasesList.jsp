@@ -19,7 +19,7 @@
 					<c:when test="${socio != null}">
 					<h2>Clases</h2>
 				
-						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
+						<table class="table  col-12 mb-5 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'
@@ -62,7 +62,7 @@
 							</tbody>
 						</table>
 					</c:when>
-					<c:when test="${rol_user == 2}"><h2>Clases</h2>
+					<c:when test="${monitor != null}"><h2>Clases</h2>
 						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
@@ -98,7 +98,7 @@
 						</table>
 					</c:when>
 					<c:when test="${admin =! null}"><h2>Clases</h2>
-						<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
+						<table class="table mb-5 mx-auto col-12 table-hover table-borderless table-responsive table-striped">
 							<thead>
 								<tr>
 									<th scope='col'

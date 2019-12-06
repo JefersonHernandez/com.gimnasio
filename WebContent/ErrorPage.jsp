@@ -12,14 +12,18 @@
 	<%@include file="html/nav.html"%>
 	<div class="container">
 		<div class="row padding">
-		<div class="card col-12 col-sm-6 text-center mx-auto">
-		<c:if test="${error_msg !=null }">
-			<label class="alert text-danger">${error_msg}</label>
-			</c:if>
-		</div>
+			<div class="card col-12 col-sm-6 text-center mx-auto">
+				<c:if test="${error_msg !=null }">
+				
+
+					<div class="alert alert-danger" role="alert">
+							<label>${error_msg}</label>
+					</div>
+				</c:if>
+			</div>
 
 
-			
+
 
 
 		</div>

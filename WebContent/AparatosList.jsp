@@ -14,10 +14,9 @@
 
 	<div class="container">
 		<div class="row padding">
-			<div class=" card col-12 col-sm-8 margin">
+			<div class=" card col-12 col-sm-8 margin mx-auto">
 				<h2>Aparatos</h2>
-
-				<table class="table mb-0 table-hover table-borderless table-responsive table-striped">
+				<table class="col-sm-12 table mb-0 table-hover table-borderless table-responsive">
 					<thead>
 						<tr>
 							<th scope='col'
