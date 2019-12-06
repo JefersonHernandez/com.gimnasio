@@ -15,7 +15,7 @@
 		<div class="row padding">
 			<div class="card col-md-8 margin">
 				<h2>Salas</h2>
-				<table class="table mb-5 table-hover table-borderless ">
+				<table class="table mb-5 table-hover table-borderless table-responsive table-striped">
 					<thead>
 						<tr>
 							<th scope='col'
